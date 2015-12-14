@@ -1,0 +1,9 @@
+[submodule "puppet/environments/dev/modules/stdlib"]
+	path = puppet/environments/dev/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib
+[submodule "puppet/environments/dev/modules/epel"]
+	path = puppet/environments/dev/modules/epel
+	url = http://github.com/stahnma/puppet-module-epel
+[submodule "puppet/environments/dev/modules/graphite"]
+	path = puppet/environments/dev/modules/graphite
+	url = https://github.com/echocat/puppet-graphite
