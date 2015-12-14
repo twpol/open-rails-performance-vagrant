@@ -7,3 +7,9 @@
 [submodule "puppet/environments/dev/modules/graphite"]
 	path = puppet/environments/dev/modules/graphite
 	url = https://github.com/echocat/puppet-graphite
+[submodule "puppet/environments/dev/modules/concat"]
+	path = puppet/environments/dev/modules/concat
+	url = https://github.com/puppetlabs/puppetlabs-concat
+[submodule "puppet/environments/dev/modules/apache"]
+	path = puppet/environments/dev/modules/apache
+	url = https://github.com/puppetlabs/puppetlabs-apache
