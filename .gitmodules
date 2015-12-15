@@ -13,3 +13,6 @@
 [submodule "puppet/environments/dev/modules/apache"]
 	path = puppet/environments/dev/modules/apache
 	url = https://github.com/puppetlabs/puppetlabs-apache
+[submodule "puppet/environments/dev/modules/firewalld"]
+	path = puppet/environments/dev/modules/firewalld
+	url = https://github.com/jpopelka/puppet-firewalld
