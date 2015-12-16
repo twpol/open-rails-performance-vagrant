@@ -16,3 +16,9 @@
 [submodule "puppet/environments/dev/modules/firewalld"]
 	path = puppet/environments/dev/modules/firewalld
 	url = https://github.com/jpopelka/puppet-firewalld
+[submodule "puppet/environments/dev/modules/nodejs"]
+	path = puppet/environments/dev/modules/nodejs
+	url = https://github.com/puppet-community/puppet-nodejs
+[submodule "puppet/environments/dev/modules/statsd"]
+	path = puppet/environments/dev/modules/statsd
+	url = https://github.com/justindowning/puppet-statsd

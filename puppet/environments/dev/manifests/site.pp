@@ -17,6 +17,21 @@ package { 'pytz':
     ensure => 'latest',
 }
 
+class { 'nodejs':
+    notify => Class['statsd'],
+    nodejs_dev_package_ensure => 'present',
+    npm_package_ensure        => 'present',
+    repo_class                => '::epel',
+}
+
+
+
+class { 'statsd':
+    backends     => ['./backends/graphite'],
+    graphiteHost => 'localhost',
+    graphite_legacyNamespace => false,
+}
+
 class { 'graphite':
     notify => Class['Apache::Service'],
     gr_graphite_ver => '0.9.15',
@@ -24,6 +39,31 @@ class { 'graphite':
     gr_whisper_ver  => '0.9.15',
     gr_web_server             => 'none',
     gr_disable_webapp_cache   => true,
+    gr_storage_schemas        => [
+        {
+            name       => 'stats',
+            pattern    => '^stats.*',
+            retentions => '10s:6h,1min:6d,10min:1800d',
+        },
+        # Default rules:
+        {
+            name       => 'carbon',
+            pattern    => '^carbon\.',
+            retentions => '1m:90d',
+        },
+        {
+            name       => 'default',
+            pattern    => '.*',
+            retentions => '1s:30m,1m:1d,5m:2y',
+        }
+    ],
+    gr_storage_aggregation_rules => {
+        'min'     => { pattern => '\.lower(_\d+)?$', xFilesFactor => '0.1', aggregationMethod => 'min' },
+        'max'     => { pattern => '\.upper(_\d+)?$', xFilesFactor => '0.1', aggregationMethod => 'max' },
+        'sum'     => { pattern => '\.sum(_\d+)?$',   xFilesFactor => '0',   aggregationMethod => 'sum' },
+        'count'   => { pattern => '\.count$',        xFilesFactor => '0',   aggregationMethod => 'sum' },
+        'default' => { pattern => '.*',              xFilesFactor => '0.3', aggregationMethod => 'average' },
+    },
     gr_memcache_hosts         => ['127.0.0.1:11211'],
 }
 
