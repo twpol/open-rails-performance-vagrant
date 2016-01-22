@@ -22,3 +22,6 @@
 [submodule "puppet/environments/dev/modules/statsd"]
 	path = puppet/environments/dev/modules/statsd
 	url = https://github.com/justindowning/puppet-statsd
+[submodule "puppet/environments/dev/modules/collectd"]
+	path = puppet/environments/dev/modules/collectd
+	url = https://github.com/puppet-community/puppet-collectd

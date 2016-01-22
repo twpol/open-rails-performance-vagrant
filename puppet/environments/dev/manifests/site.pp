@@ -1,6 +1,6 @@
 class { 'epel':
-    before => Class['graphite'],
 }
+Class['epel'] -> Package<| |>
 
 if $::osfamily == 'RedHat' and versioncmp($::operatingsystemrelease, '7.0') >= 0 {
     class { 'firewalld::configuration':
@@ -26,10 +26,31 @@ class { 'nodejs':
 
 
 
+class { 'collectd':
+    minimum_version => '5.5', # Needed to avoid running Puppet twice.
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+}
+
+class { 'collectd::plugin::cpu':
+}
+
+class { 'collectd::plugin::load':
+}
+
+class { 'collectd::plugin::memory':
+}
+
+collectd::plugin::write_graphite::carbon { 'graphite':
+}
+
 class { 'statsd':
     backends     => ['./backends/graphite'],
     graphiteHost => 'localhost',
     graphite_legacyNamespace => false,
+    flushInterval => 10000, # Must match interval for Graphite storage schema.
+    percentThreshold => [90, 95, 99],
 }
 
 class { 'graphite':
@@ -42,7 +63,12 @@ class { 'graphite':
     gr_storage_schemas        => [
         {
             name       => 'stats',
-            pattern    => '^stats.*',
+            pattern    => '^stats\.',
+            retentions => '10s:6h,1min:6d,10min:1800d',
+        },
+        {
+            name       => 'collectd',
+            pattern    => '^collectd\.',
             retentions => '10s:6h,1min:6d,10min:1800d',
         },
         # Default rules:
