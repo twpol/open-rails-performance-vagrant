@@ -14,7 +14,7 @@ You will need to install:
 * Navigate to a place for storing the virtual machine configuration. You do not need to create a new subdirectory.
 * Run the following commands:
 ```
-git clone https://github.com/twpol/open-rails-performance-vagrant
+git clone --recursive https://github.com/twpol/open-rails-performance-vagrant
 cd open-rails-performance-vagrant
 vagrant up
 ```

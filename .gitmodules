@@ -24,4 +24,4 @@
 	url = https://github.com/justindowning/puppet-statsd
 [submodule "puppet/environments/dev/modules/collectd"]
 	path = puppet/environments/dev/modules/collectd
-	url = https://github.com/puppet-community/puppet-collectd
+	url = https://github.com/twpol/open-rails-performance-vagrant
