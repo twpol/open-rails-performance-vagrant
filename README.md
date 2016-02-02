@@ -15,6 +15,7 @@ You will need to install:
 * Run the following commands:
 ```
 git clone https://github.com/twpol/open-rails-performance-vagrant
+cd open-rails-performance-vagrant
 vagrant up
 ```
 * Wait for the virtual machine to download, boot and be configured.
